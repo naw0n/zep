@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>prev,next animation slide</title>
+    <style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    li {
+        list-style: none
+    }
+
+    #wrap {
+        width: 1000px;
+        margin: 20px auto;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .slide {
+        width: 2000px;
+          }
+
+    .slide>li {
+        width: 1000px;
+        float: left;
+        height: 960px;
+    }
+
+    .slide>li>img {
+        width: 100%;
+        height: 100%;
+    }
+
+    #wrap>p {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border-radius: 15px;
+        background: rgba(255, 255, 255, 0.8);
+        padding: 10px 20px;
+        font-size: 24px;
+    }
+
+    #wrap>span {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        display: block;
+        font-size: 38px;
+        color: #fff;
+        background: rgba(0, 0, 0, 0.6);
+        height: 50px;
+        line-height: 40px;
+        text-align: center;
+        cursor: pointer;
+    }
+
+    .prev {
+        left: 0;
+        border-radius: 0 10px 10px 0;
+        padding: 0 8px 0 2px;
+    }
+
+    .next {
+        right: 0;
+        border-radius: 10px 0 0 10px;
+        padding: 0 2px 0 8px;
+    }
+    #wrap > span:hover { background:rgba(255,255,255,0.8); 
+    	color:#000;}
+    </style>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+</head>
+
+<body>
+    <div id="wrap">
+        <ul class="slide">
+            <li>
+                <img src="https://cdn.pixabay.com/photo/2018/09/23/18/30/drop-3698073_960_720.jpg" alt="slide image">
+            </li>
+            <li>
+               <img src="https://cdn.pixabay.com/photo/2015/10/30/20/13/sunrise-1014712_960_720.jpg" alt="slide image">
+            </li>
+        </ul>
+        <span class="prev">&lt;</span>
+        <span class="next">&gt;</span>
+    </div>
+    <script>
+    $('.prev').click(function(){
+    	$('.slide li:last').prependTo('.slide');
+    	$('.slide').css('margin-left',-1000);
+    	$('.slide').stop().animate({marginLeft:0}, 800)
+    });
+    $('.next').click(function(){
+    	$('.slide').stop().animate({marginLeft:-1000},800, function(){
+    		$('.slide li:first').appendTo('.slide');
+    		$('.slide').css({marginLeft:0})
+    	})
+    });
+    </script>
+</body>
+
+</html>
